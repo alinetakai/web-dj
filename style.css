@@ -44,9 +44,11 @@ body{
 }
 
 canvas {
+    display: block;
+    margin: auto;
     border: 5px solid white;
     border-radius: 20px;
-    margin: auto;
-    margin-top: 5%;
+    max-width: 100%;
+    height: auto;
 }
 

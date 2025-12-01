@@ -8,6 +8,9 @@ let leftWristY = 0;
 let canvas;
 let video;
 let poseNet;
+let inNumberLeftWristY;
+let removeDecimals;
+let volume;
 
 function preload(){
     song = loadSound("music.mp3");
@@ -15,7 +18,7 @@ function preload(){
 
 function setup(){
     canvas = createCanvas(600,500);
-    canvas.center();
+    //canvas.center();
     //canvas.position(650,200);
 
     video = createCapture(VIDEO);
@@ -52,24 +55,40 @@ function draw(){
         circle(rightWristX, rightWristY, 20);
 
         if(rightWristY > 0 && rightWristY <= 100){
-            document.getElementById("speed") = "Velocidade = 0.5x";
+            document.getElementById("speed").innerHTML = "Velocidade = 0.5x";
             song.rate(0.5);
         }
         else if(rightWristY > 100 && rightWristY <= 200){
-            document.getElementById("speed") = "Velocidade = 1x";
+            document.getElementById("speed").innerHTML = "Velocidade = 1x";
             song.rate(1);    
         }
         else if(rightWristY > 200 && rightWristY <= 300){
-            document.getElementById("speed") = "Velocidade = 1.5x";
+            document.getElementById("speed").innerHTML = "Velocidade = 1.5x";
             song.rate(1.5);    
         }
         else if(rightWristY > 300 && rightWristY <= 400){
-            document.getElementById("speed") = "Velocidade = 2x";
+            document.getElementById("speed").innerHTML = "Velocidade = 2x";
             song.rate(2);    
         }
         else if(rightWristY > 400){
-            document.getElementById("speed") = "Velocidade = 2.5x";
+            document.getElementById("speed").innerHTML = "Velocidade = 2.5x";
             song.rate(2.5);    
+        }
+
+        if(scoreLeftWrist > 0.2){
+            circle(leftWristX, leftWristY, 20);
+            inNumberLeftWristY = Number(leftWristY);
+            removeDecimals = floor(inNumberLeftWristY);
+            volume = removeDecimals / 500;
+            document.getElementById("volume").innerHTML = "Volume = " + volume;
+            song.setVolume(volume);
         }
     }
 }
+
+function play(){
+    song.play();
+    song.setVolume(1);
+    song.rate(1);
+}
+
