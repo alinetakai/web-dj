@@ -18,31 +18,14 @@ function preload(){
 
 function setup(){
     canvas = createCanvas(600,500);
-    //canvas.center();
-    //canvas.position(650,200);
-
+    canvas.parent("canvas-container");
+    //canvas.position(650, 180); //sobe o canvas no pc, mas não fica responsivo
+    
     video = createCapture(VIDEO);
     video.hide();
 
     poseNet = ml5.poseNet(video, modelLoaded);
     poseNet.on("pose", gotPoses);
-}
-
-function modelLoaded(){
-    console.log("PoseNet is initialized!");
-}
-
-function gotPoses(results){
-    if(results.length > 0){
-        scoreRightWrist = results[0].pose.keypoints[10].score;
-        scoreLeftWrist = results[0].pose.keypoints[9].score;
-
-        rightWristX = results[0].pose.rightWrist.x;
-        rightWristY = results[0].pose.rightWrist.y;
-
-        leftWristX = results[0].pose.leftWrist.x;
-        lefttWristY = results[0].pose.leftWrist.y;
-    }    
 }
 
 function draw(){
@@ -74,16 +57,33 @@ function draw(){
             document.getElementById("speed").innerHTML = "Velocidade = 2.5x";
             song.rate(2.5);    
         }
-
-        if(scoreLeftWrist > 0.2){
-            circle(leftWristX, leftWristY, 20);
-            inNumberLeftWristY = Number(leftWristY);
-            removeDecimals = floor(inNumberLeftWristY);
-            volume = removeDecimals / 500;
-            document.getElementById("volume").innerHTML = "Volume = " + volume;
-            song.setVolume(volume);
-        }
     }
+
+    if(scoreLeftWrist > 0.2){
+        circle(leftWristX, leftWristY, 20);
+        inNumberLeftWristY = Number(leftWristY);
+        removeDecimals = floor(inNumberLeftWristY);
+        volume = removeDecimals / 500;
+        document.getElementById("volume").innerHTML = "Volume = " + volume;
+        song.setVolume(volume);
+    }
+}
+
+function modelLoaded(){
+    console.log("PoseNet is initialized!");
+}
+
+function gotPoses(results){
+    if(results.length > 0){
+        scoreRightWrist = results[0].pose.keypoints[10].score;
+        scoreLeftWrist = results[0].pose.keypoints[9].score;
+
+        rightWristX = results[0].pose.rightWrist.x;
+        rightWristY = results[0].pose.rightWrist.y;
+
+        leftWristX = results[0].pose.leftWrist.x;
+        leftWristY = results[0].pose.leftWrist.y;
+    }    
 }
 
 function play(){

@@ -1,18 +1,22 @@
 body{
     background-image: url("background.jpg");
     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .container{
-    justify-content: center;
-    align-items: center;
     text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .heading{
     font-size: 23px;
     width: 100%;
-    margin: 0px;
+    margin: 0;
 }
 
 .note{
@@ -20,35 +24,173 @@ body{
     color: black;
 }
 
-.div_speed{
-  	float: left;
+/* Controles de velocidade e volume */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px auto 0;
 }
 
-.div_speed_img, .div_volume_img{
-  	width: 200px; 
-  	border-radius: 100px;
+.speed,
+.volume {
+    float: none;
+    text-align: center;
+    width: 250px;
 }
 
-#speed, #volume{
-  	font-size: 23px;
-  	margin: 15px;
+.disk {
+    width: 200px;
+    border-radius: 100px;
+    max-width: 100%;
 }
 
-.div_volume{
-  	float: right;	
+#speed,
+#volume {
+    font-size: 23px;
+    margin: 15px;
 }
 
-.play_button{
-  	width: 150px;
-  	font-size: 25px;
-}
-
-canvas {
+/* Botão reproduzir*/
+.play_button {
     display: block;
-    margin: auto;
-    border: 5px solid white;
-    border-radius: 20px;
+    width: 150px;
+    font-size: 25px;
+    margin: 10px auto 0;
+    position: relative;
+    z-index: 10;
+    transform: translateY(-250px);
+}
+
+/* Área do canvas */
+#canvas-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: -200px;
+}
+
+/* Canvas */
+#canvas-container canvas {
+    display: block;
+    width: 600px;
     max-width: 100%;
     height: auto;
+    border: 5px solid white;
+    border-radius: 20px;
 }
 
+/* =====================================================
+   RESPONSIVIDADE
+   ===================================================== */
+
+/* Tablets e telas menores */
+@media (max-width: 900px) {
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .heading {
+        font-size: 20px;
+    }
+
+    .note {
+        font-size: 14px;
+    }
+
+    .controls {
+        width: 95%;
+    }
+
+    .speed,
+    .volume {
+        width: 220px;
+    }
+
+    .disk {
+        width: 170px;
+    }
+
+    #speed,
+    #volume {
+        font-size: 20px;
+    }
+
+    #canvas-container {
+        margin-top: -100px;
+    }
+
+    #canvas-container canvas {
+        width: 95vw;
+        height: auto;
+    }
+}
+
+
+/* =====================================================
+   CELULARES
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 5px;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .heading {
+        font-size: 10px;
+    }
+
+    .note {
+        font-size: 6px;
+        line-height: 1.6;
+    }
+
+    /* Controles */
+    .controls {
+        width: 100%;
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    .speed,
+    .volume {
+        width: 45%;
+    }
+
+    .disk {
+        width: 130px;
+    }
+
+    #speed,
+    #volume {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    /* Botão */
+    .play_button {
+        width: 120px;
+        font-size: 16px;
+        margin-top: 260px;
+    }
+
+    /* Canvas */
+    #canvas-container {
+        width: 100%;
+        margin-top: -230px;
+    }
+
+    #canvas-container canvas {
+        width: 95vw;
+        height: auto;
+    }
+}

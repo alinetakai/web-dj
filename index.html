@@ -34,21 +34,26 @@
             </span>
   	    </h3>
 
-        <div class="div_speed">
-            <img src="disk.gif" class="div_speed_img">
-            <br>
-            <h3 class="btn btn-danger" id="speed">Velocidade</h3>
-	    </div>
+        <div class="controls">
 
-        <div class="div_volume">
-            <img src="disk.gif" class="div_volume_img">
-            <br>
-            <h3 class="btn btn-danger" id="volume">Volume</h3>
+            <div class="speed">
+                <img src="disk.gif" class="disk">
+                <br>
+                <h3 class="btn btn-danger" id="speed">Velocidade</h3>
+            </div>
+
+            <div class="volume">
+                <img src="disk.gif" class="disk">
+                <br>
+                <h3 class="btn btn-danger" id="volume">Volume</h3>
+            </div>
+
         </div>
 
-        <br><br>
-
         <button onclick="play();" class="btn btn-success play_button">Reproduzir</button>
+
+        <!-- Área onde o p5.js vai colocar o canvas -->
+        <div id="canvas-container"></div>
 
     </div>
 
